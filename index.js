@@ -9,16 +9,24 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    return res.send('Hello World');
+    res.status(200).json({
+        message : "Hello World"
+    })
 })
 
 app.post('/getReq' , (req , res) => {
     try {
         const data = req.body;
         console.log(data);
-        return res.status(200).send(data);
+        res.status(200).json({
+            message : "Data Received",
+            data : data
+        })
     } catch (error) {
-        return res.status(500).send("Error");
+         res.status(500).json({
+            message : "Internal Server Error",
+            error : error
+        })
     }
 })
 
